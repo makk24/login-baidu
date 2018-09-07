@@ -117,7 +117,7 @@ if __name__=='__main__':
     else:
         raise Exception
     ################加密password########################3
-    pre_password = b'mkkyxx1221'
+    pre_password = b'*****'
     pubkey = pubkey.replace('\\n','\n').replace('\\','')
     rsakey = RSA.importKey(pubkey)
     cipher = PKCS1_v1_5.new(rsakey)
@@ -145,7 +145,7 @@ if __name__=='__main__':
         'subpro':'',
         'tpl':'mn',
         'u':'https://www.baidu.com/',
-        'username':'15210320867',
+        'username':'*******',
         'callback':'parent.'+callback3,
         'gid':gid,
         'password':password,
