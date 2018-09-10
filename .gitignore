@@ -1,0 +1,7 @@
+.vscode/
+example/
+node_modules/
+package-lock.json
+build/
+dist/
+baidu_wenku_user.conf

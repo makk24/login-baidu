@@ -8,7 +8,7 @@
       "name": "Python: Current File",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/baidu2.py"
+      "program": "${workspaceFolder}/test.py"
     },
     {
       "name": "Python: Attach",
