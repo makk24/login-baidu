@@ -66,7 +66,7 @@ if __name__=='__main__':
 #创建Request对象
     req1 = opener.open('http://www.baidu.com')# request.Request(url=login_url, data=logingpostdata, headers=head)
     cookies.add_cookie_header
-    cookies.set_cookie(cookiejar.Cookie(version=0, name='BAIDUCUID', value="g8S8i_8sSulNOva80iSciguxvtlOO2i_gu2XiginSaira28C_uvS8_uY2igGa2f1A",
+    cookies.set_cookie(cookiejar.Cookie(version=0, name='BAIDUCUID', value="pULIljZt3zWFHfjpO3ZACs6tj54zmeXK2Vjaz8BRzhkk67Cvhk6Ho5pPbgV3H5EtA",
                      port=None, port_specified=None,
                      domain=".baidu.com", domain_specified=None, domain_initial_dot=None,
                      path="/", path_specified=None,
@@ -82,7 +82,7 @@ if __name__=='__main__':
       print('Value = %s' % item.value)
     res1=s.get('https://ext.baidu.com/api/subscribe/v1/relation/status', cookies=cookies,headers=headers);
     print((res1.text))
-    res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1561943308755000&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookies, headers=headers)
+    res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1572051252621351&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookies, headers=headers)
     print((res.text))
     res3=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1570634869043995&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookies, headers=headers)
 
