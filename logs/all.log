@@ -1,0 +1,7 @@
+2018-09-13 16:33:45,743 - E:\project\gitPro\login-baidu/guanzhu.py[line:58] - INFO: <Response [200]>
+2018-09-13 16:50:05,230 - E:\project\gitPro\login-baidu/guanzhu.py[line:28] - INFO: {"errno":0,"request_id":"3071381480","errmsg":"","data":{"isLogin":false}}
+2018-09-13 16:50:05,250 - E:\project\gitPro\login-baidu/guanzhu.py[line:30] - INFO: doid:1572051252621351,cuid:pULIljZt3zWFHfjpO3ZACs6tj54zmeXK2Vjaz8BRzhkk67Cvhk6Ho5pPbgV3H5EtA------_box_jsonp120( {"errno":10000202,"request_id":"3301358768","errmsg":"get store info failed, (uid,cuid) is empty","data":{}} )
+2018-09-13 16:52:08,257 - E:\project\gitPro\login-baidu/guanzhu.py[line:28] - INFO: {"errno":0,"request_id":"3128283188","errmsg":"","data":{"isLogin":false}}
+2018-09-13 16:52:08,277 - E:\project\gitPro\login-baidu/guanzhu.py[line:30] - INFO: doid:1572051252621351,cuid:pULIljZt3zWFHfjpO3ZACs6tj54zmeXK2Vjaz8BRzhkk67Cvhk6Ho5pPbgV3H5EtA------_box_jsonp120( {"errno":10000202,"request_id":"3128303419","errmsg":"get store info failed, (uid,cuid) is empty","data":{}} )
+2018-09-13 16:52:09,300 - E:\project\gitPro\login-baidu/guanzhu.py[line:28] - INFO: {"errno":0,"request_id":"3129326717","errmsg":"","data":{"isLogin":false}}
+2018-09-13 16:52:09,325 - E:\project\gitPro\login-baidu/guanzhu.py[line:30] - INFO: doid:1572051252621352,cuid:pULIljZt3zWFHfjpO3ZACs6tj54zmeXK2Vjaz8BRzhkk67Cvhk6Ho5pPbgV3H5EtA------_box_jsonp120( {"errno":10000202,"request_id":"3129349512","errmsg":"get store info failed, (uid,cuid) is empty","data":{}} )

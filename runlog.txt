@@ -1,0 +1,16 @@
+# Netscape HTTP Cookie File# http://curl.haxx.se/rfc/cookie_spec.html# This is a generated file!  Do not edit..baidu.com	TRUE	/	FALSE	1568117702	BAIDUID	027CD1E7CC51144507B5F50B93898800:FG=1# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.baidu.com	TRUE	/	FALSE	1568117741	BAIDUID	E156D8AF4C6EF172EDE7CE9F1F0B9869:FG=1
+
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.baidu.com	TRUE	/	FALSE	1568117793	BAIDUID	87839AA2CA5CD6292B99AFD65BF4C9A3:FG=1
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.baidu.com	TRUE	/	FALSE	1568117825	BAIDUID	D3E15B1990281B3BD18B70D2AE0F9EA0:FG=1
