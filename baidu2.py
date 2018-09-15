@@ -24,12 +24,10 @@ headers = {
     'Connection': 'keep-alive'
     
 }
-# cookie_jar = RequestsCookieJar()
+cookie_jar = RequestsCookieJar()
+cookie_jar.set("BAIDUID", "B1CCDD4B4BC886BF99364C72C8AE1C01:FG=1", domain="baidu.com")
 
-# requests.utils.add_dict_to_cookiejar(ssrequest.cookies, BCOOKIES)
-# cookie_jar.set("BAIDUID", "B1CCDD4B4BC886BF99364C72C8AE1C01:FG=1", domain="baidu.com")
-
-# cookies = {'name': 'FP_UID', 'value': 'a8e078358d61a058b43420dee15e9e77', 'domain': 'baidu.com','path': '/'}
+cookies = {'name': 'FP_UID', 'value': 'a8e078358d61a058b43420dee15e9e77', 'domain': '.baidu.com','path': '/'}
 def _get_runntime():
     """
     :param path: 加密js的路径,注意js中不要使用中文！估计是pyexecjs处理中文还有一些问题
@@ -56,6 +54,9 @@ def get_gid():
 def get_callback():
     return _get_runntime().call('callback')
 if __name__=='__main__':
+    name = input('请输入用户名:\n')
+    pre_password = input('请输入密码:\n')
+    
     s = requests.session()
     #使用urlencode方法转换标准格式
     #logingpostdata = parse.urlencode(Login_Data).encode('utf-8')
@@ -66,18 +67,19 @@ if __name__=='__main__':
     #通过CookieHandler创建opener
     opener = request.build_opener(cookie_support)
     #创建Request对象
-    req1 = opener.open('http://www.baidu.com')# request.Request(url=login_url, data=logingpostdata, headers=head)
+    req1 = opener.open('http://m.baidu.com')# request.Request(url=login_url, data=logingpostdata, headers=head)
     for item in cookie:
-      print('Name = %s' % item.name)
-      print('Value = %s' % item.value)
+        cookies[item.name]=item.value
+        print('Name = %s' % item.name)
+        print('Value = %s' % item.value)
     #面向对象地址
     date_url = 'https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1595896505607270&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position='
     #面向对象
-    req2 =  request.Request(date_url, data=logingpostdata, headers=head)
-    print(req2.text)
+    req2 =  request.Request(date_url, data={}, headers=headers)
+    print(req2)
 
     # 访问登录页面的初始页面，然后这次访问会话带上 cookies
-    s.get("https://www.baidu.com/v2/?login", headers=headers, cookies=cookies,verify=False)
+    s.get("https://www.baidu.com/v2/?login", headers=headers, cookies=cookie,verify=False)
     
     ###########获取gid#############################3
     gid =get_gid()
@@ -86,7 +88,7 @@ if __name__=='__main__':
     ###########获取token#############################3
     tokenUrl="https://passport.baidu.com/v2/api/?getapi&tpl=mn&apiver=v3&tt=%d&class=login&gid=%s&loginversion=v4&logintype=dialogLogin&traceid=&callback=%s"%(time.time()*1000,gid,callback1)
 
-    token_response = s.get(tokenUrl, cookies=cookies, headers=headers,verify=False)
+    token_response = s.get(tokenUrl, cookies=cookie, headers=headers,verify=False)
     pattern = re.compile(r'"token"\s*:\s*"(\w+)"')
     match = pattern.search(token_response.text)
     if match:
@@ -117,7 +119,7 @@ if __name__=='__main__':
     else:
         raise Exception
     ################加密password########################3
-    pre_password = b'*****'
+    pre_password = bytes(pre_password, encoding = "utf8") 
     pubkey = pubkey.replace('\\n','\n').replace('\\','')
     rsakey = RSA.importKey(pubkey)
     cipher = PKCS1_v1_5.new(rsakey)
@@ -145,7 +147,7 @@ if __name__=='__main__':
         'subpro':'',
         'tpl':'mn',
         'u':'https://www.baidu.com/',
-        'username':'*******',
+        'username':name,
         'callback':'parent.'+callback3,
         'gid':gid,
         'password':password,
@@ -157,7 +159,7 @@ if __name__=='__main__':
 
     }
     ###########第一次post#############################3
-    post1_response = s.post('https://passport.baidu.com/v2/api/?login', cookies=cookies,data=data)
+    post1_response = s.post('https://passport.baidu.com/v2/api/?login', cookies=cookie,data=data)
     pattern = re.compile("codeString=(\w+)&")
     match = pattern.search(post1_response.text)
     if match:
@@ -229,12 +231,12 @@ if __name__=='__main__':
     # password = base64.b64encode(cipher.encrypt(pre_password))
     # print( password
     # data['password']=password
-    post2_response = s.post('https://passport.baidu.com/v2/api/?login', cookies=cookies,data=data,headers=headers)
+    post2_response = s.post('https://passport.baidu.com/v2/api/?login', cookies=cookie,data=data,headers=headers)
     print(post2_response.cookies.get_dict())
     if post2_response.text.find('err_no=0')!=-1:
-      res1=s.get('https://ext.baidu.com/api/subscribe/v1/relation/status', cookies=post2_response.cookies,headers=headers);
+      res1=s.get('https://ext.baidu.com/api/subscribe/v1/relation/status', cookies=cookie,headers=headers);
       print((res1.text))
-      res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1595896505607270&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=post2_response.cookies, headers=headers)
+      res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1595896505607270&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookie, headers=headers)
       print((res.text))
       print( '登录成功')
     else:
