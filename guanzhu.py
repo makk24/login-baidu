@@ -12,8 +12,19 @@ headers = {
     'User-Agent': agent,
     'Connection': 'keep-alive'
 }
-def toRequest(cuid,doid):
+def toRequest(cuid,doid,uss):
   cookies.set_cookie(cookiejar.Cookie(version=0, name='BAIDUCUID', value=cuid,
+                     port=None, port_specified=None,
+                     domain=".baidu.com", domain_specified=None, domain_initial_dot=None,
+                     path="/", path_specified=None,
+                     secure=None,
+                     expires=None,
+                     discard=None,
+                     comment=None,
+                     comment_url=None,
+                     rest=None,
+                     rfc2109=False,))
+  cookies.set_cookie(cookiejar.Cookie(version=0, name='BDUSS', value=uss,
                      port=None, port_specified=None,
                      domain=".baidu.com", domain_specified=None, domain_initial_dot=None,
                      path="/", path_specified=None,
@@ -26,8 +37,8 @@ def toRequest(cuid,doid):
                      rfc2109=False,))
   res1=s.get('https://ext.baidu.com/api/subscribe/v1/relation/status', cookies=cookies,headers=headers);
   log.logger.info(res1.text)
-  res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id='+doid+'&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookies, headers=headers)
-  log.logger.info('doid:'+doid+',cuid:'+cuid+'------'+res.text)
+  res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id='+doid+'&sfrom=dusite&source=dusite_pagelist&store=uid&sid=&position=', cookies=cookies, headers=headers)
+  log.logger.info('doid:'+doid+',uss:'+uss+'------'+res.text)
 
 if __name__=='__main__':
     s = requests.session()
@@ -38,12 +49,15 @@ if __name__=='__main__':
     cookies.add_cookie_header
     filename = 'cuid.txt'
     filename1 = 'doid.txt'
+    filename2 = 'uss.txt'
     file_doid = open(filename1).read().splitlines()
     file_cuid = open(filename).read().splitlines()
+    file_uss = open(filename2).read().splitlines()
     for doid in file_doid:
       if doid.strip()!="":
-        for cuid in file_cuid:
-          if cuid.strip()!="":
-            toRequest(cuid.strip(),doid.strip())
-            time.sleep(1)
+        for uss in file_uss:
+          for cuid in file_cuid:
+            if cuid.strip()!="":
+              toRequest(cuid.strip(),doid.strip(),uss)
+              time.sleep(0.02)
     input()
