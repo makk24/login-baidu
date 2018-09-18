@@ -41,6 +41,8 @@ def toRequest(cuid,doid,uss):
   log.logger.info('doid:'+doid+',uss:'+uss+'------'+res.text)
 
 if __name__=='__main__':
+    starnum=int(input('请输入开始数:\n'))
+    endnum=int(input('请输入结束数:\n'))
     s = requests.session()
     cookies = cookiejar.CookieJar()
     cookie_support = request.HTTPCookieProcessor(cookies)
@@ -55,9 +57,10 @@ if __name__=='__main__':
     file_uss = open(filename2).read().splitlines()
     for doid in file_doid:
       if doid.strip()!="":
-        for uss in file_uss:
-          for cuid in file_cuid:
-            if cuid.strip()!="":
-              toRequest(cuid.strip(),doid.strip(),uss)
-              time.sleep(0.02)
+        for index,uss in enumerate(file_uss):
+          if index>=starnum and index<=endnum and uss.strip()!="":  
+              for cuid in file_cuid:
+                if cuid.strip()!="":
+                  toRequest(cuid.strip(),doid.strip(),uss.strip())
+                  time.sleep(0.01)
     input()

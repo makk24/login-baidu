@@ -19,7 +19,8 @@ init_time= str(int(time.time() * 1000))
 agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
 headers = {
     'User-Agent': agent,
-    'Connection': 'keep-alive'
+    'Connection': 'keep-alive',
+    'Referer':'https://account.dianping.com/account/iframeLogin?callback=EasyLogin_frame_callback0&wide=false&protocol=https:&redir=http://www.dianping.com/'
     
 }
 # cookie_jar = RequestsCookieJar()
@@ -64,45 +65,26 @@ if __name__=='__main__':
     #通过CookieHandler创建opener
     opener = request.build_opener(cookie_support)
 #创建Request对象
-    req1 = opener.open('http://www.baidu.com')# request.Request(url=login_url, data=logingpostdata, headers=head)
+    req1 = opener.open('http://www.dianping.com')# request.Request(url=login_url, data=logingpostdata, headers=head)
     cookies.add_cookie_header
-    cookies.set_cookie(cookiejar.Cookie(version=0, name='BAIDUCUID', value="pULIljZt3zWFHfjpO3ZACs6tj54zmeXK2Vjaz8BRzhkk67Cvhk6Ho5pPbgV3H5EtA",
-                     port=None, port_specified=None,
-                     domain=".baidu.com", domain_specified=None, domain_initial_dot=None,
-                     path="/", path_specified=None,
-                     secure=None,
-                     expires=None,
-                     discard=None,
-                     comment=None,
-                     comment_url=None,
-                     rest=None,
-                     rfc2109=False,))
+    # cookies.set_cookie(cookiejar.Cookie(version=0, name='BAIDUCUID', value="pULIljZt3zWFHfjpO3ZACs6tj54zmeXK2Vjaz8BRzhkk67Cvhk6Ho5pPbgV3H5EtA",
+    #                  port=None, port_specified=None,
+    #                  domain=".baidu.com", domain_specified=None, domain_initial_dot=None,
+    #                  path="/", path_specified=None,
+    #                  secure=None,
+    #                  expires=None,
+    #                  discard=None,
+    #                  comment=None,
+    #                  comment_url=None,
+    #                  rest=None,
+    #                  rfc2109=False,))
     for item in cookies:
       print('Name = %s' % item.name)
       print('Value = %s' % item.value)
-    res1=s.get('https://ext.baidu.com/api/subscribe/v1/relation/status', cookies=cookies,headers=headers);
-    print((res1.text))
-    res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1572051252621351&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookies, headers=headers)
-    print((res.text))
-    res3=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1570634869043995&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookies, headers=headers)
-
-
-    res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?type=media&op_type=add&third_id=1595896505607270&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=cookies, headers=headers)
 
     username = input("请输入你的手机号或者邮箱\n >:")
     pre_password = input("请输入你的密码\n >:")
     
-    #创建Request对象
-    req1 = opener.open('http://www.baidu.com')# request.Request(url=login_url, data=logingpostdata, headers=head)
-    for item in cookies:
-      print('Name = %s' % item.name)
-      print('Value = %s' % item.value)
-    #面向对象地址
-    date_url = 'https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1595896505607270&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position='
-    #面向对象
-    req2 =  request.Request(date_url, data={}, headers=headers)
-    print(req2)
-
     # 访问登录页面的初始页面，然后这次访问会话带上 cookies
     s.get("https://www.baidu.com/v2/?login", headers=headers, cookies=cookies,verify=False)
     
@@ -259,7 +241,7 @@ if __name__=='__main__':
     post2_response = s.post('https://passport.baidu.com/v2/api/?login', cookies=cookies,data=data,headers=headers)
     print(post2_response.cookies.get_dict())
     if post2_response.text.find('err_no=0')!=-1:
-      res1=s.get('https://ext.baidu.com/api/subscribe/v1/relation/status', cookies=post2_response.cookies,headers=headers);
+      res1=s.get('https://ext.baidu.com/api/subscribe/v1/relation/status', cookies=post2_response.cookies,headers=headers)
       print((res1.text))
       res=s.get('https://ext.baidu.com/api/subscribe/v1/relation/receive?callback=_box_jsonp120&type=media&op_type=add&third_id=1561943308755000&sfrom=dusite&source=dusite_pagelist&store=uid_cuid&sid=&position=', cookies=post2_response.cookies, headers=headers)
       print((res.text))
